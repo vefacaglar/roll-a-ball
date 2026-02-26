@@ -14,6 +14,15 @@ public class CameraController : MonoBehaviour
 
     void LateUpdate()
     {
+        // if the player has been destroyed, stop updating the camera to
+        // avoid MissingReferenceException.  Unity returns true for == null
+        // on destroyed objects, so check before accessing transform.
+        if (player == null)
+        {
+            enabled = false; // optional: freeze camera in place
+            return;
+        }
+
         transform.position = player.transform.position + offset;
     }
 }
