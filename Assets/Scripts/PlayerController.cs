@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-         rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
     }
 
     void OnMove(InputValue movementValue)
@@ -29,5 +29,13 @@ public class PlayerController : MonoBehaviour
 
         rb.AddForce(movement * speed);
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Pickup"))
+        {
+            other.gameObject.SetActive(false);
+        }
     }
 }
